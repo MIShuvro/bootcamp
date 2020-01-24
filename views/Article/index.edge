@@ -1,0 +1,10 @@
+@layout('layouts.markup')
+
+@section('page-content')
+ <h1>Home Page</h1>
+
+ @each(post in posts)
+   
+ @!component('components.articles',title=post.title,body=post.body)
+ @endeach
+@endsection

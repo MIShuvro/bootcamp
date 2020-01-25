@@ -3,10 +3,17 @@
           <div class="card-body">
             <h2 class="card-title">{{title}}</h2>
             <p class="card-text">{{body}}</p>
-            <a href="#" class="btn btn-primary">Read More &rarr;</a>
+            <form action="/articles/delete/{{id}}" method="POST">
+              <a href="/articles/{{id}}" class="btn btn-primary">Read More &rarr;</a>
+              <button class="btn btn-danger" type="submit">Delete Post</button>
+              
+            </form>
+            <form action="/articles/edit/{{id}}" method="POST">
+                <button class="mt-3  btn btn-warning btn-lg" type="submit">Edit Post</button>
+            </form>
           </div>
           <div class="card-footer text-muted">
-            Posted on January 1, 2017 by
-            <a href="{{url}}">Start Bootstrap</a>
+            Posted on {{time}}, {{date}} by
+          <a href="{{url}}">{{author}}</a>
           </div>
 </div>

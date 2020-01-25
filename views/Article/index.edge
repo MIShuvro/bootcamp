@@ -1,10 +1,13 @@
 @layout('layouts.markup')
 
 @section('page-content')
- <h1>Home Page</h1>
+ <h1>Articles Page</h1>
 
- @each(post in posts)
-   
- @!component('components.articles',title=post.title,body=post.body)
- @endeach
+    @each(post in posts.toJSON())
+        
+    @!component('components.articles',title=post.title,body=post.body,id=post.id,date=post.date,time=post.time,author=post.author)
+
+    @endeach
+
 @endsection
+

@@ -15,6 +15,10 @@ config({
 app.use(engine);
 app.set('views', `${__dirname}/views`);
 
+app.use(express.urlencoded({
+    extended: true
+}))
+app.use(express.json())
 /**
  * Setup Static dir
  */
@@ -24,24 +28,17 @@ app.set('views', `${__dirname}/views`);
  */
 app.use(express.static("public"))
 
-app.use('', require('./routes/post'))
+app.get('/', require('./controllers/postController').article)
+app.use('/articles', require('./routes/post'))
 
-app.get('/about', (req, res) => {
-    res.render('pages.about', {
-        name: "About"
-    })
-})
-app.get('/contact', (req, res) => {
-    res.render('pages.contact', {
-        name: "Contact"
-    })
-})
-app.get('/service', (req, res) => {
-    res.render('pages.services', {
-        name: "Service"
-    })
-})
+app.use('/pages', require('./routes/page'))
+app.all("*", (req, res) => {
 
+    res.render('pages.404'), {
+        name: "Not Found"
+    }
+
+})
 
 
 

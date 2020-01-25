@@ -1,0 +1,27 @@
+{
+  "posts": [{
+      "id": "5",
+      "title": "dfgd",
+      "body": "dfsg",
+      "date": "Saturday, January 25th, 2020",
+      "time": "7:53:42 AM",
+      "author": "dfg"
+    },
+    {
+      "id": "43",
+      "title": "sdfc sdf",
+      "body": "sdf",
+      "date": "Saturday, January 25th, 2020",
+      "time": "8:17:40 AM",
+      "author": "sdf"
+    },
+    {
+      "id": "2",
+      "title": "How to query select",
+      "body": "With lowdb, you get access to the entire lodash API, so there are many ways to query and manipulate data. Here are a few examples to get you started.\r\n\r\nPlease note that data is returned by reference, this means that modifications to returned objects may change the database. To avoid such behaviour, you need to use .cloneDeep().\r\n\r\nAlso, the execution of methods is lazy, that is, execution is deferred until .value() or .write() is called.",
+      "date": "Saturday, January 25th, 2020",
+      "time": "8:49:43 AM",
+      "author": "lowdb"
+    }
+  ]
+}

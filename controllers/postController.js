@@ -1,16 +1,91 @@
 const axios = require('axios')
-module.exports.postRequest = async (req, res) => {
-    // let {
-    //     data: posts
-    // } = await axios.get('https://jsonplaceholder.typicode.com/posts')
+const dateformat = require("dateformat")
+const db = require('../utils/db')
+const article = async (req, res) => {
 
-    // res.render('index', {
-    //     posts
-    // })
+    let posts = db.get('posts')
+
+    res.render('Article.index', {
+        posts
+    })
 }
-module.exports.article = async (req, res) => {
+const create = (req, res) => {
+    res.render('Article.create')
+}
+
+const postContent = (req, res) => {
+    let now = new Date();
     let {
-        data: posts
-    } = await axios.get('https://jsonplaceholder.typicode.com/posts')
-    res.render('Article.index', posts)
+        id,
+        title,
+        body,
+        author
+    } = req.body
+    db.get('posts')
+        .push({
+            id,
+            title,
+            body,
+            date: dateformat(now, "dddd, mmmm dS, yyyy"),
+            time: dateformat(now, "h:MM:ss TT"),
+            author
+        })
+        .write()
+    res.redirect('/')
+}
+const getSinglePost = (req, res) => {
+    let id = req.params.id
+    const post = db.get('posts').find({
+        id
+    })
+    res.render('Article.Show', post.toJSON())
+}
+
+const deletePost = (req, res) => {
+    let id = req.params.id
+
+    const posts = db.get('posts').remove({
+        id
+    }).write()
+
+    res.redirect('/')
+    // res.send(post)
+}
+
+const editPost = (req, res) => {
+
+    let id = req.params.id
+    const post = db.get('posts').find({
+        id
+    })
+    res.render("Article.edit", {
+        post: post.toJSON()
+    })
+}
+
+const savedPost = (req, res) => {
+    let id = req.params.id
+    let {
+        title,
+        body
+    } = req.body
+    db.get('posts')
+        .find({
+            id
+        })
+        .assign({
+            title,
+            body
+        })
+        .write()
+    res.redirect('/')
+}
+module.exports = {
+    article,
+    create,
+    postContent,
+    getSinglePost,
+    deletePost,
+    editPost,
+    savedPost
 }
